@@ -9,7 +9,7 @@ from typing import List
 import logging
 import os
 from shutil import move, rmtree
-
+from .constants import *
 
 def get_current_path() -> str:
     """Obtiene el directorio actual de la aplicación.
@@ -42,9 +42,9 @@ def create_folder(folder_names: List[str], directory: str = '') -> None:
             folder_path = os.path.join(directory, folder)
             if not path_exists(folder_path):
                 os.mkdir(folder_path)
-                logging.info('Folder %s created successfully', folder)
+                logging.info(CREATED_DIRECTORY, folder)
             else:
-                logging.info('Folder %s already exists', folder)
+                logging.info(EXISTS_DIRECTORY, folder)
         except (OSError, Exception) as exc:
             logging.error(str(exc),
                           exc_info=True)
@@ -61,9 +61,9 @@ def delete_folder(*folders: str) -> None:
         try:
             if path_exists(folder):
                 rmtree(folder)
-                logging.info('Folder %s deleted successfully', folder)
+                logging.info(DELETED_DIRECTORY, folder)
             else:
-                logging.info('Folder %s not exists', folder)
+                logging.info(NO_DIRECTORY, folder)
         except (OSError, Exception) as exc:
             logging.error(str(exc),
                           exc_info=True)
